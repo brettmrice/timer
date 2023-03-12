@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+  
+<html id="myButton">
+  <head>
+    <link rel="icon" href="" type="image/ico" sizes="32x32">
+    <title>Timer</title>
+    <meta charset="UTF-8">
+    <style>
+      body {
+        padding: 0; 
+        margin: 0;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+      }
+      html {
+        /*background-color: green;*/
+        height: 100%;
+        overflow: hidden;
+      }
+      .container{
+      	display:flex;
+      	text-align:center;
+        justify-content: center;
+        align-items: center;
+        background-color: white; /*#31cb00;/*#f21b3f;/*#ffff3f*/
+      }
+      .box{
+        display: flex;
+      	width: 80%;
+      	/*height: 300px;*/
+      	height: 60vh;
+      	background-color: white; /*blue;*/
+        justify-content: center;
+        align-items: center;
+        border-radius: 10px;
+      }
+      #timer {
+        font-size: 13vw;
+        color: black;
+      }
+      @media screen and ( min-width: 1000px ) {
+        #timer {
+        /*font-size: 150px;*/
+      }
+      }
+    </style>
+  </head>
+<body class="container" onclick="resetTimer()">
+    
+    <div class="box">
+      <div id="timer">
+        <h1 id="timer_main">
+          <span id="timer_min">2</span
+          ><span>:</span
+          ><span id="timer_sec">00</span>
+        </h1>
+      </div>
+    </div>
+  
+<script type="text/javascript">
+  count_lapse = 0;
+  reset_count = "no";
+  min = document.getElementById("timer_min");
+  sec = document.getElementById("timer_sec");
+  function countDown() {
+    count_step = count_lapse % 60;
+    if(count_lapse < 120) {
+      sec.innerHTML = checkTime(59 - count_step);
+      if(count_step === 0) {
+        min.innerHTML = parseInt(min.innerHTML) - 1;
+      }
+      if(count_lapse >= 100) {
+        if(document.getElementsByClassName("box")[0].style.backgroundColor === "") {
+          document.getElementsByClassName("box")[0].style.backgroundColor = "#f21b3f";
+          document.getElementById("timer").style.color = "white";
+        } else {
+          document.getElementsByClassName("box")[0].style.backgroundColor = "";
+          document.getElementById("timer").style.color = "";
+        }
+      }
+    } else {
+      if(count_lapse === 120) {
+        document.getElementsByClassName("container")[0].style.backgroundColor = "#f21b3f";
+        document.getElementsByClassName("box")[0].style.backgroundColor = "#f21b3f";
+        document.getElementById("timer").style.color = "#f21b3f";
+        document.getElementById("timer").style.color = "white";
+      }
+      sec.innerHTML = checkTime(count_step);
+      if(count_step === 0 && count_lapse < 180) {
+        min.innerHTML = "-0";
+      } else if(count_step === 0) {
+        min.innerHTML = parseInt(min.innerHTML) - 1;
+      }
+    }
+    count_lapse += 1;
+  }
+  function checkTime(i) {
+    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    return i;
+  }
+  function resetTimer() {
+    if(reset_count === "no") {
+      count_interval = setInterval(countDown, 1000);
+      reset_count = "yes";
+    } else {
+      clearInterval(count_interval);
+      count_lapse = 0;
+      reset_count = "no";
+      document.getElementsByClassName("container")[0].style.backgroundColor = "";
+      document.getElementsByClassName("box")[0].style.backgroundColor = "";
+      document.getElementById("timer").style.color = "";
+      min.innerHTML = 2;
+      sec.innerHTML = checkTime(0);
+    }
+  }
+</script>
+</body>
+</html>
