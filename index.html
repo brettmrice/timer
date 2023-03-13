@@ -72,7 +72,7 @@
       if(count_step === 0) {
         min.innerHTML = parseInt(min.innerHTML) - 1;
       }
-      if(count_lapse >= 100) {
+      if(count_lapse >= 99) {
         if(document.getElementsByClassName("box")[0].style.backgroundColor === "") {
           document.getElementsByClassName("box")[0].style.backgroundColor = "#f21b3f";
           document.getElementById("timer").style.color = "white";
@@ -87,18 +87,25 @@
         document.getElementsByClassName("box")[0].style.backgroundColor = "#f21b3f";
         document.getElementById("timer").style.color = "#f21b3f";
         document.getElementById("timer").style.color = "white";
-      }
-      sec.innerHTML = checkTime(count_step);
-      if(count_step === 0 && count_lapse < 180) {
+        min.innerHTML = "0";
+        sec.innerHTML = "00";
+      } else if(count_lapse === 121) {
         min.innerHTML = "-0";
-      } else if(count_step === 0) {
+        sec.innerHTML = checkTime(count_step);
+      } else if(count_step === 0 && count_lapse > 120) {
         min.innerHTML = parseInt(min.innerHTML) - 1;
+        sec.innerHTML = checkTime(count_step);
+      } else {
+        sec.innerHTML = checkTime(count_step);
       }
     }
+    //console.log(count_lapse, "\t", count_step, "\t", min.innerHTML, "\t", sec.innerHTML);
     count_lapse += 1;
   }
   function checkTime(i) {
-    if (i < 10) {i = "0" + i};  // add zero in front of numbers < 10
+    if ( i < 10 || i === "60") {
+      i = "0" + i
+    };  // add zero in front of numbers < 10
     return i;
   }
   function resetTimer() {
