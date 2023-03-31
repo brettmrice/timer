@@ -11,5 +11,6 @@
   ],
   "name": "Two-Minutes",
   "short_name": "2Mins",
+  "id": "/timer/index.html",
   "start_url": "index.html"
 }
