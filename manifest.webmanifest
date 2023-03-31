@@ -1,0 +1,15 @@
+{
+  "background_color": "white",
+  "description": "Two-minute countdown timer",
+  "display": "fullscreen",
+  "icons": [
+    {
+      "src": "icon/fox-icon.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }
+  ],
+  "name": "Two-Minutes",
+  "short_name": "2Mins",
+  "start_url": "index.html"
+}
